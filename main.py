@@ -2,23 +2,26 @@ import pprint
 import os
 
 #Задание 1
-cook_book = {}
-with open('recipes.txt', encoding='utf-8') as f:
-    for line in f:
-        if len(line) > 2  and "|" not in line:
-            key = line.strip()
-            cook_book[key]=[]
-        elif key in cook_book and "|" in line:
-            composition = line.split("|")
-            new_dict = {'ingredient_name':composition[0].strip(), 'quantity': int(composition[1].strip()), 'measure': composition[2].strip()}
-            cook_book[key].append(new_dict)
 
-pprint.pprint(cook_book)
+def make_cook_book(file):
+    cook_book = {}
+    with open(file, encoding='utf-8') as f:
+        for line in f:
+            if len(line) > 2  and "|" not in line:
+                key = line.strip()
+                cook_book[key]=[]
+            elif key in cook_book and "|" in line:
+                composition = line.split("|")
+                new_dict = {'ingredient_name':composition[0].strip(), 'quantity': int(composition[1].strip()), 'measure': composition[2].strip()}
+                cook_book[key].append(new_dict)
+    return cook_book
+pprint.pprint(make_cook_book('recipes.txt'))
 
 
 #Задание 2
 def get_shop_list_by_dishes(dishes, person_count):
     result={}
+    cook_book = make_cook_book('recipes.txt')
     for dish in dishes:
         for ingredient_dict in cook_book[dish]:
             name = ingredient_dict['ingredient_name']
