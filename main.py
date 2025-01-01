@@ -20,7 +20,7 @@ pprint.pprint(make_cook_book('recipes.txt'))
 
 #Задание 2
 def get_shop_list_by_dishes(dishes, person_count):
-    result={}
+    result = {}
     cook_book = make_cook_book('recipes.txt')
     for dish in dishes:
         for ingredient_dict in cook_book[dish]:
